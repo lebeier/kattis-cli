@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+username=
+password=
 url="https://open.kattis.com/login/email?"
 useragent="User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"
 
@@ -17,8 +19,12 @@ visit_page() {
 }
 
 main() {
-  username=$1
-  password=$2
+  printf "username:"
+  read username
+  printf "password:"
+  stty -echo
+  read password
+  stty echo
 
   visit_page
   curl -sL -c cookies -b cookies \
