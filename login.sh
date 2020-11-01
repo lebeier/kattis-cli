@@ -30,7 +30,7 @@ main() {
   curl -sL -c cookies -b cookies \
     -H "Content-Type: application/x-www-form-urlencoded" \
     -d "csrf_token=${csrf}&user=${username}&password=${password}&submit=Submit" \
-    $url > /dev/null
+    $url | grep '<a href="/users/.*">' | head -n 1 | sed 's/.*href="\/users\/\(.*\)".*/\1/g'
 }
 
 main $@
