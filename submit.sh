@@ -14,8 +14,9 @@ get_submit_ctr() {
 }
 
 main() {
-  problem=$1
-  filename=$2
+  language=$1
+  problem=$2
+  filename=$3
 
   local content=$(curl -sL -c cookies -b cookies \
     -H $useragent https://open.kattis.com/problems/${problem}/submit)
@@ -29,7 +30,7 @@ main() {
     -F "type=files" \
     -F "sub_file[]=@${filename}" \
     -F "problem=${problem}" \
-    -F "language=C++" \
+    -F "language=\"${language}\"" \
     -F "submit=Submit" \
     -F "submit_ctr=${submit_ctr}" \
     https://open.kattis.com/problems/${problem}/submit > /dev/null
